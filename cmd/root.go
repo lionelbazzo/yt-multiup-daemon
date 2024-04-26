@@ -27,7 +27,7 @@ var rootCmd = &cobra.Command{
 	Use:   "gallery-daemon",
 	Short: "",
 	Long: `
-The daemon that index, and stream all the photos to the backend.`,
+The daemon that index, and stream all the videos to the backend.`,
 }
 
 var version = "v0.0.0"
