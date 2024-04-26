@@ -1,4 +1,4 @@
-CREATE TABLE photos
+CREATE TABLE videos
 (
     hash          TEXT PRIMARY KEY,
     path          TEXT NOT NULL,
@@ -19,6 +19,6 @@ CREATE TABLE thumbnails
     width     INTEGER NOT NULL,
     thumbnail BLOB,
 
-    CONSTRAINT hash_fk FOREIGN KEY (hash) REFERENCES photos (hash),
+    CONSTRAINT hash_fk FOREIGN KEY (hash) REFERENCES videos (hash),
     CONSTRAINT thumbnails_unique UNIQUE (hash, height, width)
 )

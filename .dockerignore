@@ -7,6 +7,6 @@ test
 gallery-daemon
 LICENSE
 Makefile
-photos.db
+videos.db
 README.md
 sqlc.yml

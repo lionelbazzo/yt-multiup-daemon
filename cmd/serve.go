@@ -25,9 +25,9 @@ import (
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 
-	"github.com/michaelcoll/gallery-daemon/internal/photo"
-	"github.com/michaelcoll/gallery-daemon/internal/photo/domain/banner"
-	"github.com/michaelcoll/gallery-daemon/internal/photo/domain/model"
+	"github.com/michaelcoll/gallery-daemon/internal/video"
+	"github.com/michaelcoll/gallery-daemon/internal/video/domain/banner"
+	"github.com/michaelcoll/gallery-daemon/internal/video/domain/model"
 )
 
 const (
@@ -56,7 +56,7 @@ In this mode it will :
 
 		banner.Print(rootCmd.Version, owner, banner.Serve)
 
-		module := photo.NewForServe(localDb, folder, model.ServeParameters{
+		module := video.NewForServe(localDb, folder, model.ServeParameters{
 			GrpcPort:      grpcPort,
 			ExternalHost:  externalHost,
 			DaemonName:    getDaemonName(),
@@ -65,19 +65,19 @@ In this mode it will :
 		})
 
 		// Indexation
-		photoService := module.GetPhotoService()
+		videoService := module.GetVideoService()
 		if reIndex {
-			photoService.ReIndex(context.Background(), folder)
+			videoService.ReIndex(context.Background(), folder)
 		} else {
-			photoService.Index(context.Background(), folder)
+			videoService.Index(context.Background(), folder)
 		}
-		photoService.CloseDb()
+		videoService.CloseDb()
 
 		// Registration
 		go module.GetRegisterService().Register()
 
 		// Watch for file changes
-		go photoService.Watch(folder)
+		go videoService.Watch(folder)
 
 		// Serving backend requests
 		module.GetController().Serve()

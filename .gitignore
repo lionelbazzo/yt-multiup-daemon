@@ -11,7 +11,7 @@ gallery-daemon
 *.pb.go
 
 # database
-photos.db
-photos.db-journal
-photos.db-shm
-photos.db-wal
+videos.db
+videos.db-journal
+videos.db-shm
+videos.db-wal
